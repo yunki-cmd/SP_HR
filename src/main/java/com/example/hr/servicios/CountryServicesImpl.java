@@ -35,5 +35,21 @@ public class CountryServicesImpl implements CountryServices {
   public List<Country> getAllCountryByRegion(String region) {
     return country.listCountryByRegion(region);
   }
+
+  @Override
+  public List<String> cantidadPaisByregion() {
+    return country.listCantidadPaisByRegion();
+  }
+
+
+  @Override
+  public void deletebyId(String pais) {
+    country.deleteByName(pais);
+  }
+
+  @Override
+  public void newCountry(Country country) {
+    this.country.save(country);
+  }
   
 }

@@ -14,4 +14,6 @@ public interface RegionServices {
 
   public void nuevosRegion(Regions region);
 
+  public void deleteRegion(Integer id);
+
 }

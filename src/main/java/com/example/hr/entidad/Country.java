@@ -1,12 +1,10 @@
 package com.example.hr.entidad;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 @Entity
 @Table(name = "countries")
 public class Country {
@@ -18,19 +16,20 @@ public class Country {
   @Column(name = "COUNTRY_NAME")
   private String country_name;
 
-  @ManyToOne
-  @JoinColumn(name = "REGION_ID")
-  private Regions region;
+  @Column(name = "REGION_ID")
+  private Integer region_id;
 
-  public Country(String country_id, String country_name, Regions region) {
+  @ManyToOne
+  @JoinColumn(name = "REGION_ID",referencedColumnName = "REGION_ID",columnDefinition = "REGION_ID",insertable = false,updatable = false)
+  private  Regions region;
+
+  public Country(String country_id, String country_name, Integer region_id) {
     this.country_id = country_id;
     this.country_name = country_name;
-    this.region = region;
+    this.region_id = region_id;
   }
 
-  public Country() {
-    super();
-  }
+  public Country() {}
 
 
   /**
@@ -45,12 +44,6 @@ public class Country {
   public String getCountry_name() {
     return country_name;
   }
-  /**
-   * @return the region
-   */
-  public Regions getRegion() {
-    return region;
-  }
 
   /**
    * @param country_id the country_id to set
@@ -64,11 +57,28 @@ public class Country {
   public void setCountry_name(String country_name) {
     this.country_name = country_name;
   }
-  /**
-   * @param region the region to set
-   */
+
+
+  public Regions getRegion() {
+    return region;
+  }
+
   public void setRegion(Regions region) {
     this.region = region;
+  }
+
+  /**
+   * @return the region_id
+   */
+  public Integer getRegion_id() {
+    return region_id;
+  }
+
+  /**
+   * @param region_id the region_id to set
+   */
+  public void setRegion_id(Integer region_id) {
+    this.region_id = region_id;
   }
 
 }

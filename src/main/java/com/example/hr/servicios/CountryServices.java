@@ -11,6 +11,14 @@ public interface CountryServices {
 
   public Country findByRegions(String name);
 
+  public List<String> cantidadPaisByregion();
 
   public List<Country> getAllCountryByRegion(String region);
+
+  public void deletebyId(String pais);
+
+  public void newCountry(Country country);
+
+
+
 }

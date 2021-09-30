@@ -8,4 +8,6 @@ public interface EmployeerServices {
   
   public List<Employees> getAllEmployers();
 
+  public List<Employees> empleadoPorPais(String pais);
+
 }

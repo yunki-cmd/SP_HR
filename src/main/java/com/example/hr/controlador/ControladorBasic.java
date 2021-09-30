@@ -9,6 +9,7 @@ import com.example.hr.servicios.CountryServices;
 import com.example.hr.servicios.RegionServicesImple;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/")
 public class ControladorBasic {
   
@@ -56,6 +58,32 @@ public class ControladorBasic {
     return countryServices.getAllCountryByRegion(region);
   }
 
+  @GetMapping(path = {"/api/country/regionPais"})
+  public List<String> paisByRegion() {
+    return countryServices.cantidadPaisByregion();
+  }
 
+  @GetMapping(path = { "/api/country/nuevo" })
+  public void nuevoPais() {
+    Country pais = new Country("ES", "Spain", 1);
+    countryServices.newCountry(pais);
+  }
+
+  @GetMapping(path = { "/api/country/delete" })
+  public void eliminarPais(@RequestParam(name = "name") String pais) {
+    countryServices.deletebyId(pais);
+  }
+
+
+
+  @GetMapping(path = {"/api/region/save"})
+  public void saveRegion() {
+    Regions r1 = new Regions(5, "Antartita");
+    regionServicesImple.nuevosRegion(r1);
+  }
+  @GetMapping(path = {"/api/region/delete"})
+  public void deleteRegion(@RequestParam(name = "id") int id) {
+    regionServicesImple.deleteRegion(id);
+  }
 
 }

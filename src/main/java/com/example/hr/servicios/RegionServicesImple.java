@@ -21,19 +21,30 @@ public class RegionServicesImple implements RegionServices {
 
   @Override
   public Regions findByID(Integer id) {
-    // TODO Auto-generated method stub
+    
     return null;
   }
 
   @Override
   public Regions findByRegions(String name) {
-    // TODO Auto-generated method stub
+    
     return null;
   }
 
   @Override
   public void nuevosRegion(Regions region) {
-    repositorioRegion.save(region);
+    Regions r1 = new Regions(5,"Antartita");
+    repositorioRegion.save(r1);
+  }
+
+  @Override
+  public void deleteRegion(Integer id) {
+    try {
+      repositorioRegion.deleteById(id);
+    } catch (Exception e) {
+      System.out.println("fallo: "+e.getMessage());
+    }
+    
   }
   
 }

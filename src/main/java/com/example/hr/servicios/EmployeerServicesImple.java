@@ -18,5 +18,11 @@ public class EmployeerServicesImple implements EmployeerServices {
   public List<Employees> getAllEmployers() {
     return employees.findAll();
   }
+
+  @Override
+  public List<Employees> empleadoPorPais(String pais) {
+    return employees.empleadoPorPais(pais);
+  }
+
   
 }

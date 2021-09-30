@@ -4,19 +4,20 @@ package com.example.hr.entidad;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 @Table(name = "employees")
+@SecondaryTable(name = "jobs", pkJoinColumns = @PrimaryKeyJoinColumn(name = "JOB_ID"))
 public class Employees {
   
   @Id
@@ -36,9 +37,6 @@ public class Employees {
   @Column(name = "HIRE_DATE")
   private Date hire_date;
 
-  @Column(name = "JOB_ID")
-  private String job_id;
-
   @Column(name = "SALARY")
   private Integer salary;
 
@@ -47,6 +45,15 @@ public class Employees {
 
   @Column(name = "MANAGER_ID")
   private Integer manager;
+
+  @Column(name = "JOB_ID",insertable = false,updatable = false)
+  private String job_id;
+
+
+  @ManyToOne
+  @JoinColumn(name="job_id",referencedColumnName = "JOB_ID")
+  private Jobs jobs;
+
 
   @ManyToOne
   @JoinColumn(name = "DEPARTMENT_ID", referencedColumnName = "DEPARTMENT_ID")
@@ -123,6 +130,7 @@ public class Employees {
     return last_name;
   }
 
+
   /**
    * @param last_name the last_name to set
    */
@@ -168,20 +176,15 @@ public class Employees {
   /**
    * @param hire_date the hire_date to set
    */
-  public void setHire_date(String hire_date) {
-    try {
-      this.hire_date = new SimpleDateFormat("yyyy-MM-dd").parse(hire_date);
-    } catch (ParseException e) {
-      this.hire_date = null;
-    }
-    
+  public void setHire_date(Date hire_date) {
+    this.hire_date = hire_date;
   }
 
   /**
    * @return the job_id
    */
   public String getJob_id() {
-    return job_id;
+    return this.job_id;
   }
 
   /**
@@ -246,7 +249,5 @@ public class Employees {
   public void setDeparment(Deparment deparment) {
     this.deparment = deparment;
   }
-  
-  
 
 }
